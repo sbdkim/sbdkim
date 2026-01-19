@@ -1,6 +1,10 @@
 # 💫 About Me:
 Hello, welcome to my Github!
 
+🎓 University of North Carolina at Chapel Hill | Class of 2019
+👨🏻‍💻 Enjoy doing random coding projects on the side
+📍 Currently based in Seoul, South Korea
+
 
 ## 🌐 Socials:
 [![email](https://img.shields.io/badge/Email-D14836?logo=gmail&logoColor=white)](mailto:dlkimxc@gmail.com) 
