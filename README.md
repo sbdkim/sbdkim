@@ -1,11 +1,5 @@
 # 💫 About Me:
-Hello, welcome to my Github!
-
-🎓 University of North Carolina at Chapel Hill | Class of 2019
-
-👨🏻‍💻 Enjoy doing random coding projects on the side
-
-📍 Currently based in Seoul, South Korea
+Hello, welcome to my Github!<br><br>🎓 University of North Carolina at Chapel Hill | Class of 2019<br>👨🏻‍💻 Enjoy doing random coding projects on the side<br>📍 Currently based in Seoul, South Korea
 
 
 ## 🌐 Socials:
