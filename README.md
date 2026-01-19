@@ -2,7 +2,9 @@
 Hello, welcome to my Github!
 
 🎓 University of North Carolina at Chapel Hill | Class of 2019
+
 👨🏻‍💻 Enjoy doing random coding projects on the side
+
 📍 Currently based in Seoul, South Korea
 
 
