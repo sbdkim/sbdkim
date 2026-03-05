@@ -68,38 +68,68 @@ def esc(s):
     )
 
 def write_stats_svg(path, rows):
+    width = 495
     lines = []
-    y = 56
+    y = 72
     for k, v in rows:
-        lines.append(f'<text x="24" y="{y}" font-size="13" fill="#8b949e">{esc(k)}</text>')
-        lines.append(f'<text x="476" y="{y}" font-size="13" text-anchor="end" fill="#e6edf3" font-weight="600">{esc(v)}</text>')
-        y += 30
-    h = y + 24
-    svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="500" height="{h}" role="img" aria-label="GitHub stats">
-  <rect width="100%" height="100%" rx="12" fill="#0d1117" stroke="#30363d"/>
-  <text x="24" y="32" font-size="16" font-weight="700" fill="#e6edf3">GitHub Stats</text>
+        lines.append(f'<text x="26" y="{y}" font-size="12.5" fill="#a8b3cf">{esc(k)}</text>')
+        lines.append(f'<text x="{width-24}" y="{y}" font-size="12.5" text-anchor="end" fill="#f0f6fc" font-weight="700">{esc(v)}</text>')
+        y += 27
+
+    h = y + 20
+    updated = dt.datetime.utcnow().strftime("%Y-%m-%d")
+    svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{h}" role="img" aria-label="GitHub stats">
+  <defs>
+    <linearGradient id="bgStats" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1f2e"/>
+      <stop offset="100%" stop-color="#0d1117"/>
+    </linearGradient>
+    <linearGradient id="accentStats" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#fdbb2d"/>
+      <stop offset="100%" stop-color="#ff7b72"/>
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" rx="14" fill="url(#bgStats)" stroke="#30363d"/>
+  <rect x="18" y="19" width="190" height="4" rx="2" fill="url(#accentStats)"/>
+  <text x="26" y="48" font-size="17" font-weight="700" fill="#f0f6fc">GitHub Stats</text>
   {''.join(lines)}
-  <text x="24" y="{h-10}" font-size="11" fill="#8b949e">Updated: {dt.datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")}</text>
+  <text x="26" y="{h-10}" font-size="11" fill="#8b949e">Updated {updated}</text>
 </svg>"""
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         f.write(svg)
 
 def write_langs_svg(path, langs):
+    width = 495
     maxv = max((v for _, v in langs), default=1)
+    total = sum(v for _, v in langs) or 1
+
     bars = []
-    y = 56
+    y = 72
     for name, val in langs:
-        w = int((val / maxv) * 220)
-        bars.append(f'<text x="24" y="{y}" font-size="13" fill="#8b949e">{esc(name)}</text>')
-        bars.append(f'<rect x="140" y="{y-11}" width="220" height="8" rx="4" fill="#21262d"/>')
-        bars.append(f'<rect x="140" y="{y-11}" width="{w}" height="8" rx="4" fill="#58a6ff"/>')
-        bars.append(f'<text x="420" y="{y}" font-size="12" text-anchor="end" fill="#e6edf3">{val/1024:.0f} KB</text>')
-        y += 28
-    h = y + 16
-    svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="460" height="{h}" role="img" aria-label="Top languages">
-  <rect width="100%" height="100%" rx="12" fill="#0d1117" stroke="#30363d"/>
-  <text x="24" y="32" font-size="16" font-weight="700" fill="#e6edf3">Top Languages</text>
+        pct = (val / total) * 100
+        w = int((val / maxv) * 230)
+        bars.append(f'<text x="26" y="{y}" font-size="12.5" fill="#a8b3cf">{esc(name)}</text>')
+        bars.append(f'<rect x="150" y="{y-11}" width="230" height="8" rx="4" fill="#21262d"/>')
+        bars.append(f'<rect x="150" y="{y-11}" width="{w}" height="8" rx="4" fill="#58a6ff"/>')
+        bars.append(f'<text x="{width-24}" y="{y}" font-size="12.5" text-anchor="end" fill="#f0f6fc" font-weight="700">{pct:.1f}%</text>')
+        y += 27
+
+    h = y + 20
+    svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{h}" role="img" aria-label="Top languages">
+  <defs>
+    <linearGradient id="bgLangs" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1f2e"/>
+      <stop offset="100%" stop-color="#0d1117"/>
+    </linearGradient>
+    <linearGradient id="accentLangs" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#58a6ff"/>
+      <stop offset="100%" stop-color="#79c0ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" rx="14" fill="url(#bgLangs)" stroke="#30363d"/>
+  <rect x="18" y="19" width="190" height="4" rx="2" fill="url(#accentLangs)"/>
+  <text x="26" y="48" font-size="17" font-weight="700" fill="#f0f6fc">Top Languages</text>
   {''.join(bars)}
 </svg>"""
     os.makedirs(os.path.dirname(path), exist_ok=True)

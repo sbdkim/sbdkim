@@ -15,7 +15,7 @@ Hello, welcome to my Github!<br><br>🚢 Application Developer @ Wallenius Wilhe
 </tr>
 </table>
 
-![GitHub Streak](https://streak-stats.demolab.com?user=sbdkim&theme=transparent&hide_border=true)
+![GitHub Streak](https://streak-stats.demolab.com?user=sbdkim&theme=dark&hide_border=true)
 
 
 
