@@ -89,6 +89,11 @@ def write_stats_svg(path, rows):
       <stop offset="100%" stop-color="#ff7b72"/>
     </linearGradient>
   </defs>
+  <style>
+    text {{
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    }}
+  </style>
   <rect width="100%" height="100%" rx="14" fill="url(#bgStats)" stroke="#30363d"/>
   <rect x="18" y="19" width="190" height="4" rx="2" fill="url(#accentStats)"/>
   <text x="26" y="48" font-size="17" font-weight="700" fill="#f0f6fc">GitHub Stats</text>
@@ -127,6 +132,11 @@ def write_langs_svg(path, langs):
       <stop offset="100%" stop-color="#79c0ff"/>
     </linearGradient>
   </defs>
+  <style>
+    text {{
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    }}
+  </style>
   <rect width="100%" height="100%" rx="14" fill="url(#bgLangs)" stroke="#30363d"/>
   <rect x="18" y="19" width="190" height="4" rx="2" fill="url(#accentLangs)"/>
   <text x="26" y="48" font-size="17" font-weight="700" fill="#f0f6fc">Top Languages</text>
