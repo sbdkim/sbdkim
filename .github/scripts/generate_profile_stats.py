@@ -69,36 +69,37 @@ def esc(s):
 
 def write_stats_svg(path, rows):
     lines = []
-    y = 40
+    y = 56
     for k, v in rows:
-        lines.append(f'<text x="24" y="{y}" font-size="16" fill="#0f172a">{esc(k)}</text>')
-        lines.append(f'<text x="476" y="{y}" font-size="16" text-anchor="end" fill="#0f172a">{esc(v)}</text>')
-        y += 32
-    h = y + 16
+        lines.append(f'<text x="24" y="{y}" font-size="13" fill="#8b949e">{esc(k)}</text>')
+        lines.append(f'<text x="476" y="{y}" font-size="13" text-anchor="end" fill="#e6edf3" font-weight="600">{esc(v)}</text>')
+        y += 30
+    h = y + 24
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="500" height="{h}" role="img" aria-label="GitHub stats">
-  <rect width="100%" height="100%" rx="14" fill="#f8fafc" stroke="#cbd5e1"/>
-  <text x="24" y="24" font-size="18" font-weight="700" fill="#0f172a">GitHub Stats (Static)</text>
+  <rect width="100%" height="100%" rx="12" fill="#0d1117" stroke="#30363d"/>
+  <text x="24" y="32" font-size="16" font-weight="700" fill="#e6edf3">GitHub Stats</text>
   {''.join(lines)}
-  <text x="24" y="{h-12}" font-size="11" fill="#64748b">Updated: {dt.datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")}</text>
+  <text x="24" y="{h-10}" font-size="11" fill="#8b949e">Updated: {dt.datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")}</text>
 </svg>"""
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         f.write(svg)
 
 def write_langs_svg(path, langs):
-    maxv = max(v for _, v in langs) if langs else 1
+    maxv = max((v for _, v in langs), default=1)
     bars = []
-    y = 48
+    y = 56
     for name, val in langs:
-        w = int((val / maxv) * 260)
-        bars.append(f'<text x="24" y="{y}" font-size="14" fill="#0f172a">{esc(name)}</text>')
-        bars.append(f'<rect x="150" y="{y-12}" width="{w}" height="10" rx="5" fill="#2563eb"/>')
-        bars.append(f'<text x="420" y="{y}" font-size="12" text-anchor="end" fill="#334155">{val/1024:.0f} KB</text>')
+        w = int((val / maxv) * 220)
+        bars.append(f'<text x="24" y="{y}" font-size="13" fill="#8b949e">{esc(name)}</text>')
+        bars.append(f'<rect x="140" y="{y-11}" width="220" height="8" rx="4" fill="#21262d"/>')
+        bars.append(f'<rect x="140" y="{y-11}" width="{w}" height="8" rx="4" fill="#58a6ff"/>')
+        bars.append(f'<text x="420" y="{y}" font-size="12" text-anchor="end" fill="#e6edf3">{val/1024:.0f} KB</text>')
         y += 28
-    h = y + 18
+    h = y + 16
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="460" height="{h}" role="img" aria-label="Top languages">
-  <rect width="100%" height="100%" rx="14" fill="#f8fafc" stroke="#cbd5e1"/>
-  <text x="24" y="28" font-size="18" font-weight="700" fill="#0f172a">Top Languages (Static)</text>
+  <rect width="100%" height="100%" rx="12" fill="#0d1117" stroke="#30363d"/>
+  <text x="24" y="32" font-size="16" font-weight="700" fill="#e6edf3">Top Languages</text>
   {''.join(bars)}
 </svg>"""
     os.makedirs(os.path.dirname(path), exist_ok=True)
